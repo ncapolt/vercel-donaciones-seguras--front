@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './HomeAf.css';
 
 
@@ -25,7 +26,7 @@ function HomeAf() {
     }
 
     // Obtener campañas (puedes mantener esta lógica o cambiarla según necesites)
-    fetch('http://localhost:3000/api/campaigns')
+    fetch(`${API_URL}/api/campaigns`)
       .then(res => res.json())
       .then(data => setUserCampaigns(data))
       .catch(error => {

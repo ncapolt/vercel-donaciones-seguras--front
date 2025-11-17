@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './NuevaCampaña.css';
 
 function NuevaCampaña() {
@@ -19,7 +20,7 @@ function NuevaCampaña() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/campaigns', {
+      const response = await fetch(`${API_URL}/api/campaigns`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './SignInOrganizador.css';
 
 const SignInOrganizador = () => {
@@ -63,7 +64,7 @@ const SignInOrganizador = () => {
         tipo_usuario_id: 2 // Tipo Organizador
       };
 
-      const response = await fetch('http://localhost:3000/api/usuarios', {
+      const response = await fetch(`${API_URL}/api/usuarios`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

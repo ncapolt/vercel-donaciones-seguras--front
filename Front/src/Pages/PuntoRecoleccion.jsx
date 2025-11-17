@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './PuntoRecoleccion.css';
 
 function PuntoRecoleccion() {
@@ -30,7 +31,7 @@ function PuntoRecoleccion() {
         setLoading(true);
         setError('');
 
-        const response = await fetch('http://localhost:3000/api/destinos');
+        const response = await fetch(`${API_URL}/api/destinos`);
         const result = await response.json();
         
         if (!response.ok) {
@@ -43,7 +44,7 @@ function PuntoRecoleccion() {
       } catch (e) {
         if (isMounted) {
           console.error('Error cargando destinos:', e);
-          setError(e.message || 'Error al cargar los destinos. Verifica que el backend esté corriendo en http://localhost:3000');
+          setError(e.message || 'Error al cargar los destinos');
         }
       } finally {
         if (isMounted) setLoading(false);

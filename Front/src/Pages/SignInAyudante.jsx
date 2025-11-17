@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './SignInAyudante.css';
 
 const provincias = [
@@ -70,7 +71,7 @@ function SignInAyudante() {
         tipo_usuario_id: 1 // Tipo Afectado/Ayudante
       };
 
-      const response = await fetch('http://localhost:3000/api/usuarios', {
+      const response = await fetch(`${API_URL}/api/usuarios`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

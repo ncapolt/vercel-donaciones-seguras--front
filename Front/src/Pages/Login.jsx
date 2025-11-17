@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './Login.css';
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://vercel-donaciones-seguras.vercel.app/api/login', {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const Login = () => {
 
     try {
       // Validar que el usuario existe
-      const response = await fetch('https://vercel-donaciones-seguras.vercel.app/api/validar-usuario', {
+      const response = await fetch(`${API_URL}/api/validar-usuario`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

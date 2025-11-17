@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './ConfirmarPedido.css';
 
 function ConfirmarPedido() {
@@ -19,8 +20,8 @@ function ConfirmarPedido() {
         setError('');
 
         const [pedidoRes, productosRes] = await Promise.all([
-          fetch(`http://localhost:3000/api/pedidos/${pedidoId}`),
-          fetch(`http://localhost:3000/api/pedidos/${pedidoId}/productos`)
+          fetch(`${API_URL}/api/pedidos/${pedidoId}`),
+          fetch(`${API_URL}/api/pedidos/${pedidoId}/productos`)
         ]);
 
         if (!pedidoRes.ok || !productosRes.ok) {

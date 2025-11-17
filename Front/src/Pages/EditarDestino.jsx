@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './NuevoDestino.css';
 
 function EditarDestino() {
@@ -23,7 +24,7 @@ function EditarDestino() {
     async function loadDestino() {
       try {
         setLoadingData(true);
-        const response = await fetch(`http://localhost:3000/api/destinos/${destinoId}`);
+        const response = await fetch(`${API_URL}/api/destinos/${destinoId}`);
         
         if (!response.ok) {
           throw new Error('No se pudo cargar el destino');
@@ -76,7 +77,7 @@ function EditarDestino() {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3000/api/destinos/${destinoId}`, {
+      const response = await fetch(`${API_URL}/api/destinos/${destinoId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

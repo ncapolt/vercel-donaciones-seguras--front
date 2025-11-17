@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './NuevoProducto.css';
 
 const tiposProducto = ['Ropa', 'Limpieza', 'Alimentos', 'Medicamentos', 'Juguetes', 'Electrónica', 'Muebles', 'Calzado', 'Higiene Personal'];
@@ -31,7 +32,7 @@ function NuevoProducto() {
     async function loadTipos() {
       try {
         setLoadingTipos(true);
-        const res = await fetch('http://localhost:3000/api/tipos-producto');
+        const res = await fetch(`${API_URL}/api/tipos-producto`);
         
         if (cancelled) return;
         
@@ -83,7 +84,7 @@ function NuevoProducto() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/productos', {
+      const response = await fetch(`${API_URL}/api/productos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

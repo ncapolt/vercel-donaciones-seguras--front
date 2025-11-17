@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './CampaignProducts.css';
 
 function CampaignProducts() {
@@ -57,7 +58,7 @@ function CampaignProducts() {
 
         // Cargar campaña y productos por separado para mejor manejo de errores
         try {
-          const campaignRes = await fetch(`https://vercel-donaciones-seguras.vercel.app/api/campaigns/${campaignId}`);
+          const campaignRes = await fetch(`${API_URL}/api/campaigns/${campaignId}`);
           if (!campaignRes.ok) {
             const errorData = await campaignRes.json().catch(() => ({}));
             throw new Error(errorData.error || `Error ${campaignRes.status}: No se pudo cargar la campaña`);
@@ -70,7 +71,7 @@ function CampaignProducts() {
         }
 
         try {
-          const productsRes = await fetch(`http://localhost:3000/api/productos/by-campaign/${campaignId}`);
+          const productsRes = await fetch(`${API_URL}/api/productos/by-campaign/${campaignId}`);
           if (!productsRes.ok) {
             const errorData = await productsRes.json().catch(() => ({}));
             throw new Error(errorData.error || `Error ${productsRes.status}: No se pudieron cargar los productos`);
@@ -136,7 +137,7 @@ function CampaignProducts() {
 
     try {
       const userData = JSON.parse(usuario);
-      const response = await fetch('http://localhost:3000/api/pedidos', {
+      const response = await fetch(`${API_URL}/api/pedidos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -179,7 +180,7 @@ function CampaignProducts() {
           <div className="error-message">
             <p className="error">{error || campaignError}</p>
             <p style={{ fontSize: '0.9rem', marginTop: '8px', opacity: 0.8 }}>
-              Verifica que el backend esté corriendo en http://localhost:3000
+              Error al conectar con el servidor
             </p>
           </div>
         )}

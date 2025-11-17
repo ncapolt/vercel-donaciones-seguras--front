@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './RecuperarContraseña.css';
 
 const RecuperarContraseña = () => {
@@ -47,7 +48,7 @@ const RecuperarContraseña = () => {
         return;
       }
 
-      const response = await fetch('http://localhost:3000/api/cambiar-password', {
+      const response = await fetch(`${API_URL}/api/cambiar-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

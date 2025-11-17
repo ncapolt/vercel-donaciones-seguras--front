@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './CampaignDetail.css';
 
 function CampaignDetail() {
@@ -13,7 +14,7 @@ function CampaignDetail() {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-    fetch(`http://localhost:3000/api/campaigns/${id}`)
+    fetch(`${API_URL}/api/campaigns/${id}`)
       .then(res => {
         if (!res.ok) throw new Error('No se pudo cargar la campaña');
         return res.json();

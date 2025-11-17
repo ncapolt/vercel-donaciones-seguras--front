@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './VerificarPedido.css';
 
 function VerificarPedido() {
@@ -23,8 +24,8 @@ function VerificarPedido() {
 
         // Cargar información del pedido y productos
         const [pedidoRes, productosRes] = await Promise.all([
-          fetch(`http://localhost:3000/api/pedidos/${pedidoId}`).catch(() => null),
-          fetch(`http://localhost:3000/api/pedidos/${pedidoId}/productos`)
+          fetch(`${API_URL}/api/pedidos/${pedidoId}`).catch(() => null),
+          fetch(`${API_URL}/api/pedidos/${pedidoId}/productos`)
         ]);
 
         if (!productosRes.ok) {
@@ -88,7 +89,7 @@ function VerificarPedido() {
     setSuccess('');
 
     try {
-      const response = await fetch(`http://localhost:3000/api/pedidos/${pedidoId}/entregar`, {
+      const response = await fetch(`${API_URL}/api/pedidos/${pedidoId}/entregar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

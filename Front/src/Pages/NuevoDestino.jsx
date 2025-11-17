@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './NuevoDestino.css';
 
 function NuevoDestino() {
@@ -37,7 +38,7 @@ function NuevoDestino() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/destinos', {
+      const response = await fetch(`${API_URL}/api/destinos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

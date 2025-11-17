@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config/api';
 import './User.css';
 
 const User = () => {
@@ -68,7 +69,7 @@ const User = () => {
       }
 
       // Enviar datos al backend
-      const response = await fetch(`http://localhost:3000/api/usuarios/${usuario.id}`, {
+      const response = await fetch(`${API_URL}/api/usuarios/${usuario.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

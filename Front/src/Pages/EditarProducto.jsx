@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import { API_URL } from '../config/api';
 import './EditarProducto.css';
 
 const tiposProducto = ['Ropa', 'Limpieza', 'Alimentos', 'Medicamentos', 'Juguetes', 'Electrónica', 'Muebles', 'Calzado', 'Higiene Personal'];
@@ -43,7 +44,7 @@ function EditarProducto() {
         
         // Cargar tipos de producto
         try {
-          const tiposRes = await fetch('http://localhost:3000/api/tipos-producto');
+          const tiposRes = await fetch(`${API_URL}/api/tipos-producto`);
           if (tiposRes.ok) {
             const tiposData = await tiposRes.json();
             if (Array.isArray(tiposData) && tiposData.length > 0 && !cancelled) {
@@ -55,7 +56,7 @@ function EditarProducto() {
         }
         
         // Cargar datos del producto
-        const productRes = await fetch(`http://localhost:3000/api/productos/${productId}`);
+        const productRes = await fetch(`${API_URL}/api/productos/${productId}`);
         if (!productRes.ok) throw new Error('No se pudo cargar el producto');
         
         const product = await productRes.json();
@@ -111,7 +112,7 @@ function EditarProducto() {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3000/api/productos/${productId}`, {
+      const response = await fetch(`${API_URL}/api/productos/${productId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
