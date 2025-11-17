@@ -1,0 +1,183 @@
+.campaign-products-container {
+  min-height: calc(100vh - 64px);
+  background-color: #1a0826;
+  color: #fff;
+  padding: 24px;
+}
+
+.title {
+  text-align: center;
+  margin: 12px 0 24px;
+}
+
+.products-table-wrap { margin: 12px auto; max-width: 1000px; }
+
+.products-table { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+
+.table-row { display: grid; grid-template-columns: 1fr 0.7fr 0.5fr 0.6fr; }
+.products-table.with-actions .table-row {
+  grid-template-columns: 1fr 0.7fr 0.5fr 0.6fr 0.4fr;
+}
+.products-table.with-checkboxes .table-row {
+  grid-template-columns: 50px 1fr 0.5fr 0.6fr;
+}
+.products-table.with-checkboxes.with-actions .table-row {
+  grid-template-columns: 50px 1fr 0.7fr 0.5fr 0.6fr 0.4fr;
+}
+.table-row .col.checkbox-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table-row .col.checkbox-col input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #FFD700;
+}
+.table-row .col.acciones { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+.edit-btn {
+  background: transparent;
+  border: 2px solid #FFD700;
+  border-radius: 6px;
+  color: #FFD700;
+  font-size: 1.2rem;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.edit-btn:hover {
+  background: rgba(255, 215, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.table-header { background: rgba(148, 63, 255, 0.25); color: #fff; font-weight: 600; }
+
+.table-row .col { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.row-even { background: rgba(148, 63, 255, 0.18); }
+.row-odd  { background: rgba(148, 63, 255, 0.08); }
+
+.producto .product-name { color: #fff; text-decoration: none; }
+.destino .truncate { color: #ddd; }
+.producto-destino {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.producto-destino .product-name {
+  color: #fff;
+  font-weight: 500;
+}
+.producto-destino .destino-text {
+  color: #ddd;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+.condicion { color: #fff; }
+.estado .estado-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.estado-libre { color: #6ef790; }
+.estado-reservado { color: #ff6b6b; }
+.estado-en_camino { color: #4fc3f7; }
+.estado-en_destino { color: #4fc3f7; }
+.estado-entregado { color: #fff; }
+
+.actions { display: flex; gap: 16px; justify-content: center; margin-top: 16px; }
+.actions .primary,
+.actions .secondary { 
+  background: #6b21a8; 
+  color: #fff; 
+  border: none; 
+  border-radius: 8px; 
+  padding: 10px 16px; 
+  font-size: 1rem; 
+  cursor: pointer; 
+}
+.actions .secondary { background: #8b5cf6; }
+.actions .primary:hover, .actions .secondary:hover { opacity: 0.9; }
+
+.empty { opacity: 0.85; padding: 14px; text-align: center; }
+
+.error-message {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.error-message .error {
+  color: #FF6B6B;
+  margin: 0;
+  font-weight: 600;
+}
+
+.back-btn {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  background: transparent;
+  color: #c084fc;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.reservar-pedido-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.reserva-error-message {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 8px;
+  padding: 12px 20px;
+  text-align: center;
+}
+
+.reserva-error-message p {
+  color: #FF6B6B;
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.reservar-button {
+  background: #6ef790;
+  color: #1a0826;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 32px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 250px;
+}
+
+.reservar-button:hover:not(:disabled) {
+  background: #5dd87a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(110, 247, 144, 0.3);
+}
+
+.reservar-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+

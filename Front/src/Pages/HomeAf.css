@@ -1,0 +1,99 @@
+body, .body-content-af {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background: #180333;
+  color: white;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.body-content-af {
+  padding-top: 70px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.welcome-section-af {
+  padding: 40px 24px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.welcome-greeting-af {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: white;
+}
+
+.welcome-subtitle-af {
+  font-size: 1.1rem;
+  margin: 0 0 40px 0;
+  color: white;
+  opacity: 0.9;
+}
+
+.campaigns-container-af {
+  width: 1200px;
+  margin: 0 auto;
+  background: #2d1a4a;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #f7b32b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.campaign-row-af {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: #2d1a4a;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.campaign-row-af:hover {
+  background: #f7b32b;
+}
+
+.campaign-info-af {
+  flex: 1;
+  text-align: left;
+}
+
+.campaign-name-af {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f7b32b;
+  transition: color 0.3s ease;
+}
+
+.campaign-row-af:hover .campaign-name-af {
+  color: #b84fff;
+}
+
+.choose-indicator-af {
+  color: #b84fff;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.campaign-row-af:hover .choose-indicator-af {
+  color: #261144;
+}
+
+.campaign-separator-af {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #b84fff;
+}

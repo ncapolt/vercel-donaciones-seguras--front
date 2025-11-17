@@ -1,0 +1,197 @@
+.recuperar-container {
+  min-height: calc(100vh - 70px);
+  background: #180333;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+}
+
+/* Contenido principal centrado */
+.recuperar-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.recuperar-title {
+  color: white;
+  font-size: 64px;
+  font-weight: bold;
+  margin: 0 0 60px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.recuperar-form {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group label {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Inconsolata', monospace;
+  text-align: left;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 20px 25px;
+  border: none;
+  border-radius: 12px;
+  background: #3D2A7A;
+  color: white;
+  font-size: 18px;
+  font-family: 'Inconsolata', monospace;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+.form-group input:focus {
+  outline: none;
+  background: #4A3387;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.2);
+  color: #FEE2E2;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  text-align: center;
+  font-weight: 500;
+}
+
+.confirmar-button {
+  width: 100%;
+  padding: 25px 40px;
+  background: #3D2A7A;
+  color: #FFD700;
+  border: none;
+  border-radius: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  margin-top: 40px;
+}
+
+.confirmar-button:hover:not(:disabled) {
+  background: #FFD700;
+  color: #3D2A7A;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.confirmar-button:disabled {
+  background: #9CA3AF;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botón de retroceso estandarizado */
+.back-button {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  color: #8B5CF6;
+  font-size: 20px;
+}
+
+.back-button:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .recuperar-title {
+    font-size: 48px;
+  }
+  
+  .form-group label {
+    font-size: 18px;
+  }
+  
+  .form-group input {
+    font-size: 16px;
+    padding: 18px 22px;
+  }
+  
+  .confirmar-button {
+    font-size: 20px;
+    padding: 22px 35px;
+  }
+  
+  .logo-text {
+    font-size: 12px;
+  }
+  
+  .avatar-circle {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recuperar-title {
+    font-size: 36px;
+  }
+  
+  .form-group label {
+    font-size: 16px;
+  }
+  
+  .form-group input {
+    font-size: 14px;
+    padding: 16px 20px;
+  }
+  
+  .confirmar-button {
+    font-size: 18px;
+    padding: 20px 30px;
+  }
+  
+  .logo-box {
+    padding: 8px 12px;
+  }
+  
+  .logo-text {
+    font-size: 10px;
+  }
+  
+  .avatar-circle {
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -1,0 +1,202 @@
+.registro-container {
+  min-height: 100vh;
+  background: #180333;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header con logo */
+.registro-header {
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.registro-logo {
+  display: flex;
+  align-items: center;
+}
+
+.registro-logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Contenido principal centrado */
+.registro-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.registro-title {
+  color: white;
+  font-size: 80px;
+  font-weight: bold;
+  margin: 0 0 40px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.registro-subtitle {
+  color: white;
+  font-size: 32px;
+  margin: 0 0 100px 0;
+  font-weight: 300;
+}
+
+/* Botones de opción */
+.registro-buttons {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.registro-btn {
+  border: none;
+  border-radius: 15px;
+  padding: 40px 80px;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  min-width: 320px;
+}
+
+.organizador-btn {
+    background: #3D2A7A;
+    color: #FFD700;
+}
+
+.organizador-btn:hover {
+    background: #FFD700;
+    color: #3D2A7A;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.afectado-btn {
+  background: #3D2A7A;
+  color: #FFD700;
+}
+
+.afectado-btn:hover {
+  background: #FFD700;
+  color: #3D2A7A;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.registro-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Enlace de login */
+.registro-login-link {
+  margin-top: 20px;
+}
+
+.login-text {
+  color: #4A90E2;
+  font-size: 24px;
+}
+
+.login-link {
+  background: none;
+  border: none;
+  color: #5BA0F2;
+  font-size: 24px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.login-link:hover {
+  color: #7BB3F5;
+}
+
+/* Botón de retroceso estandarizado */
+.registro-back-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  color: #8B5CF6;
+  font-size: 20px;
+}
+
+.registro-back-btn:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.registro-back-btn svg {
+  color: #8B5CF6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .registro-title {
+    font-size: 60px;
+  }
+  
+  .registro-subtitle {
+    font-size: 26px;
+  }
+  
+  .registro-buttons {
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+  }
+  
+  .registro-btn {
+    width: 100%;
+    max-width: 420px;
+    font-size: 32px;
+    padding: 35px 60px;
+  }
+  
+  .registro-content {
+    padding: 20px;
+  }
+  
+  .login-text, .login-link {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .registro-title {
+    font-size: 44px;
+  }
+  
+  .registro-subtitle {
+    font-size: 22px;
+    margin-bottom: 80px;
+  }
+  
+  .registro-btn {
+    font-size: 30px;
+    padding: 32px 50px;
+  }
+  
+  .login-text, .login-link {
+    font-size: 20px;
+  }
+}

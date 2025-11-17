@@ -1,0 +1,132 @@
+body, .nueva-campania-bg {
+  background: #180333;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.nueva-campania-form {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.nueva-campania-title {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.nueva-campania-label {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.nueva-campania-input, .nueva-campania-select {
+  width: 100%;
+  min-width: 350px;
+  max-width: 900px;
+  background: #3a1f5a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 1.2rem;
+  margin-top: 6px;
+  margin-bottom: 24px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+
+.nueva-campania-input::placeholder {
+  color: #b8a9d1;
+  opacity: 1;
+  font-style: italic;
+}
+
+.nueva-campania-row {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.nueva-campania-select {
+  min-width: 200px;
+  color: #b84fff;
+  font-weight: 700;
+  background: #3a1f5a;
+  appearance: none;
+  position: relative;
+}
+
+.nueva-campania-select:focus {
+  border: 2px solid #b84fff;
+}
+
+.nueva-campania-btn {
+  background: #2d0066;
+  color: #f7b32b;
+  font-size: 2rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 48px;
+  margin: 40px auto 0 auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: none;
+}
+
+.nueva-campania-btn:hover {
+  background: #f7b32b;
+  color: #b84fff;
+}
+
+.nueva-campania-btn-icon {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #f7b32b;
+  margin-right: 8px;
+  margin-bottom: px;
+}
+
+.nueva-campania-btn:hover .nueva-campania-btn-icon {
+  color: #b84fff;
+}
+
+/* Botón de retroceso estandarizado */
+.nueva-campania-back {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  color: #8B5CF6;
+  font-size: 20px;
+  z-index: 10;
+}
+
+.nueva-campania-back:hover {
+  background: rgba(139, 92, 246, 0.1);
+}

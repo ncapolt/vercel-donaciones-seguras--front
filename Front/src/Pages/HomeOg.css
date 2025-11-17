@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  display: block !important;
+  place-items: initial !important;
+}
+
+.body-content {
+  padding-top: 70px;
+  min-height: 100vh;
+  background: #180333;
+  color: white;
+  width: 100%;
+  display: block !important;
+  place-items: initial !important;
+}
+
+.welcome-section {
+  padding: 40px 24px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.welcome-greeting {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: white;
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  margin: 0 0 40px 0;
+  color: white;
+  opacity: 0.9;
+}
+
+.campaigns-container {
+  width: 1200px;
+  margin: 0 auto;
+  background: #2d1a4a;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #f7b32b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.campaign-row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: #2d1a4a;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.campaign-row:hover {
+  background: #f7b32b;
+}
+
+.campaign-info {
+  flex: 1;
+  text-align: left;
+}
+
+.campaign-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f7b32b;
+  transition: color 0.3s ease;
+}
+
+.campaign-row:hover .campaign-name {
+  color: #b84fff;
+}
+
+.choose-indicator {
+  color: #b84fff;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.campaign-row:hover .choose-indicator {
+  color: #261144;
+}
+
+.campaign-separator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #f7b32b;
+}
+
+.new-campaign-btn {
+  background: #2d0066;
+  color: #f7b32b;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 32px;
+  margin-bottom: 32px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: none;
+}
+
+.new-campaign-btn.lower {
+  margin-top: 120px;
+}
+
+.new-campaign-btn:hover {
+  background: #f7b32b;
+  color: #b84fff;
+  box-shadow: 0 0 16px #f7b32b, 0 4px 24px rgba(0,0,0,0.3);
+  text-shadow: none;
+}
