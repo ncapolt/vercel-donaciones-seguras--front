@@ -57,7 +57,7 @@ function CampaignProducts() {
 
         // Cargar campaña y productos por separado para mejor manejo de errores
         try {
-          const campaignRes = await fetch(`http://localhost:3000/api/campaigns/${campaignId}`);
+          const campaignRes = await fetch(`https://vercel-donaciones-seguras.vercel.app/api/campaigns/${campaignId}`);
           if (!campaignRes.ok) {
             const errorData = await campaignRes.json().catch(() => ({}));
             throw new Error(errorData.error || `Error ${campaignRes.status}: No se pudo cargar la campaña`);
