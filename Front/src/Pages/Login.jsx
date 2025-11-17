@@ -25,7 +25,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch('https://vercel-donaciones-seguras.vercel.app/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const Login = () => {
 
     try {
       // Validar que el usuario existe
-      const response = await fetch('http://localhost:3000/api/validar-usuario', {
+      const response = await fetch('https://vercel-donaciones-seguras.vercel.app/api/validar-usuario', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
