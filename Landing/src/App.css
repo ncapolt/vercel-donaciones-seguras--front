@@ -910,7 +910,7 @@ main {
   padding: 40px 16px;
 }
 
-/* Animaciones de scroll lateral */
+/* Animaciones de scroll lateral - Velocidad rápida, easing lineal */
 .hero,
 .sobre-nosotros,
 .quienes-somos,
@@ -919,40 +919,232 @@ main {
 .faq,
 .contacto {
   position: relative;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-  will-change: transform, opacity;
   overflow-x: hidden;
+  width: 100%;
 }
 
-/* Estado inicial: las secciones que no son la primera empiezan fuera de la pantalla */
-.sobre-nosotros:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
-.quienes-somos:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
-.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
-.ongs:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
-.faq:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
-.contacto:not(.section-visible):not(.section-exit-left):not(.section-exit-right) {
-  opacity: 0;
-  transform: translateX(100%);
+/* Animaciones para elementos de izquierda */
+.sobre-left,
+.mision-left,
+.hero-content,
+.hero-title,
+.hero-description {
+  transition: transform 0.7s linear, opacity 0.7s linear;
+  will-change: transform, opacity;
 }
 
-/* Sección visible: en su posición normal */
-.section-visible {
-  transform: translateX(0);
-  opacity: 1;
+/* Animaciones para elementos de derecha */
+.sobre-right,
+.mision-right,
+.sobre-image-container,
+.sobre-image {
+  transition: transform 0.7s linear, opacity 0.7s linear;
+  will-change: transform, opacity;
 }
 
-/* Sección saliendo hacia la izquierda (cuando scrolleas hacia abajo) */
-.section-exit-left {
+/* Animaciones para contenido centrado */
+.quienes-content,
+.quienes-title,
+.quienes-profiles,
+.profile-card,
+.ongs-content,
+.ongs-title,
+.ongs-text,
+.ongs-subtitle,
+.ongs-carousel,
+.faq-content,
+.faq-title,
+.faq-questions,
+.faq-item,
+.contacto-content,
+.contacto-promo,
+.contacto-form-container {
+  transition: transform 0.7s linear, opacity 0.7s linear;
+  will-change: transform, opacity;
+}
+
+/* Estado inicial: elementos fuera de la pantalla cuando la sección no es visible */
+.hero:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .hero-content,
+.hero:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .hero-title,
+.hero:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .hero-description {
   transform: translateX(-100%);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
 }
 
-/* Sección saliendo hacia la derecha (cuando scrolleas hacia arriba) */
-.section-exit-right {
+.sobre-nosotros:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .sobre-left,
+.sobre-nosotros:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .sobre-title,
+.sobre-nosotros:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .sobre-text,
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .mision-left,
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .vision-title,
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .vision-text {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.sobre-nosotros:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .sobre-right,
+.sobre-nosotros:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .sobre-image-container,
+.sobre-nosotros:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .sobre-image,
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .mision-right,
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .mision-title,
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .mision-text,
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .mision-center,
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .mision-line {
   transform: translateX(100%);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+.quienes-somos:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .quienes-content,
+.quienes-somos:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .quienes-title,
+.quienes-somos:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .quienes-profiles,
+.quienes-somos:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .profile-card,
+.ongs:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .ongs-content,
+.ongs:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .ongs-title,
+.ongs:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .ongs-text,
+.ongs:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .ongs-subtitle,
+.ongs:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .ongs-carousel,
+.faq:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .faq-content,
+.faq:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .faq-title,
+.faq:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .faq-questions,
+.faq:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .faq-item,
+.contacto:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .contacto-content,
+.contacto:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .contacto-promo,
+.contacto:not(.section-visible):not(.section-exit-left):not(.section-exit-right) .contacto-form-container {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* Sección visible: elementos en posición normal */
+.section-visible .hero-content,
+.section-visible .hero-title,
+.section-visible .hero-description,
+.section-visible .sobre-left,
+.section-visible .sobre-title,
+.section-visible .sobre-text,
+.section-visible .mision-left,
+.section-visible .vision-title,
+.section-visible .vision-text,
+.section-visible .sobre-right,
+.section-visible .sobre-image-container,
+.section-visible .sobre-image,
+.section-visible .mision-right,
+.section-visible .mision-title,
+.section-visible .mision-text,
+.section-visible .mision-center,
+.section-visible .mision-line,
+.section-visible .quienes-content,
+.section-visible .quienes-title,
+.section-visible .quienes-profiles,
+.section-visible .profile-card,
+.section-visible .ongs-content,
+.section-visible .ongs-title,
+.section-visible .ongs-text,
+.section-visible .ongs-subtitle,
+.section-visible .ongs-carousel,
+.section-visible .faq-content,
+.section-visible .faq-title,
+.section-visible .faq-questions,
+.section-visible .faq-item,
+.section-visible .contacto-content,
+.section-visible .contacto-promo,
+.section-visible .contacto-form-container {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+}
+
+/* Sección saliendo hacia abajo: elementos de izquierda salen por la izquierda */
+.section-exit-left .hero-content,
+.section-exit-left .hero-title,
+.section-exit-left .hero-description,
+.section-exit-left .sobre-left,
+.section-exit-left .sobre-title,
+.section-exit-left .sobre-text,
+.section-exit-left .mision-left,
+.section-exit-left .vision-title,
+.section-exit-left .vision-text {
+  transform: translateX(-100%) !important;
+  opacity: 0 !important;
+}
+
+/* Sección saliendo hacia abajo: elementos de derecha salen por la derecha */
+.section-exit-left .sobre-right,
+.section-exit-left .sobre-image-container,
+.section-exit-left .sobre-image,
+.section-exit-left .mision-right,
+.section-exit-left .mision-title,
+.section-exit-left .mision-text,
+.section-exit-left .mision-center,
+.section-exit-left .mision-line {
+  transform: translateX(100%) !important;
+  opacity: 0 !important;
+}
+
+/* Sección saliendo hacia abajo: contenido centrado sale por la izquierda */
+.section-exit-left .quienes-content,
+.section-exit-left .quienes-title,
+.section-exit-left .quienes-profiles,
+.section-exit-left .profile-card,
+.section-exit-left .ongs-content,
+.section-exit-left .ongs-title,
+.section-exit-left .ongs-text,
+.section-exit-left .ongs-subtitle,
+.section-exit-left .ongs-carousel,
+.section-exit-left .faq-content,
+.section-exit-left .faq-title,
+.section-exit-left .faq-questions,
+.section-exit-left .faq-item,
+.section-exit-left .contacto-content,
+.section-exit-left .contacto-promo,
+.section-exit-left .contacto-form-container {
+  transform: translateX(-100%) !important;
+  opacity: 0 !important;
+}
+
+/* Sección saliendo hacia arriba: elementos de izquierda salen por la izquierda */
+.section-exit-right .hero-content,
+.section-exit-right .hero-title,
+.section-exit-right .hero-description,
+.section-exit-right .sobre-left,
+.section-exit-right .sobre-title,
+.section-exit-right .sobre-text,
+.section-exit-right .mision-left,
+.section-exit-right .vision-title,
+.section-exit-right .vision-text {
+  transform: translateX(-100%) !important;
+  opacity: 0 !important;
+}
+
+/* Sección saliendo hacia arriba: elementos de derecha salen por la derecha */
+.section-exit-right .sobre-right,
+.section-exit-right .sobre-image-container,
+.section-exit-right .sobre-image,
+.section-exit-right .mision-right,
+.section-exit-right .mision-title,
+.section-exit-right .mision-text,
+.section-exit-right .mision-center,
+.section-exit-right .mision-line {
+  transform: translateX(100%) !important;
+  opacity: 0 !important;
+}
+
+/* Sección saliendo hacia arriba: contenido centrado sale por la derecha */
+.section-exit-right .quienes-content,
+.section-exit-right .quienes-title,
+.section-exit-right .quienes-profiles,
+.section-exit-right .profile-card,
+.section-exit-right .ongs-content,
+.section-exit-right .ongs-title,
+.section-exit-right .ongs-text,
+.section-exit-right .ongs-subtitle,
+.section-exit-right .ongs-carousel,
+.section-exit-right .faq-content,
+.section-exit-right .faq-title,
+.section-exit-right .faq-questions,
+.section-exit-right .faq-item,
+.section-exit-right .contacto-content,
+.section-exit-right .contacto-promo,
+.section-exit-right .contacto-form-container {
+  transform: translateX(100%) !important;
+  opacity: 0 !important;
 }
 
 /* Animación de entrada desde la izquierda */
@@ -979,18 +1171,88 @@ main {
   }
 }
 
-/* Aplicar animación de entrada desde la derecha cuando scrolleas hacia abajo */
-.section-enter-from-right {
-  animation: slideInFromRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+/* Aplicar animación de entrada cuando scrolleas hacia abajo */
+.section-enter-from-right .hero-content,
+.section-enter-from-right .hero-title,
+.section-enter-from-right .hero-description,
+.section-enter-from-right .sobre-left,
+.section-enter-from-right .sobre-title,
+.section-enter-from-right .sobre-text,
+.section-enter-from-right .mision-left,
+.section-enter-from-right .vision-title,
+.section-enter-from-right .vision-text {
+  animation: slideInFromLeft 0.7s linear forwards;
 }
 
-/* Aplicar animación de entrada desde la izquierda cuando scrolleas hacia arriba */
-.section-enter-from-left {
-  animation: slideInFromLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.section-enter-from-right .sobre-right,
+.section-enter-from-right .sobre-image-container,
+.section-enter-from-right .sobre-image,
+.section-enter-from-right .mision-right,
+.section-enter-from-right .mision-title,
+.section-enter-from-right .mision-text,
+.section-enter-from-right .mision-center,
+.section-enter-from-right .mision-line,
+.section-enter-from-right .quienes-content,
+.section-enter-from-right .quienes-title,
+.section-enter-from-right .quienes-profiles,
+.section-enter-from-right .profile-card,
+.section-enter-from-right .ongs-content,
+.section-enter-from-right .ongs-title,
+.section-enter-from-right .ongs-text,
+.section-enter-from-right .ongs-subtitle,
+.section-enter-from-right .ongs-carousel,
+.section-enter-from-right .faq-content,
+.section-enter-from-right .faq-title,
+.section-enter-from-right .faq-questions,
+.section-enter-from-right .faq-item,
+.section-enter-from-right .contacto-content,
+.section-enter-from-right .contacto-promo,
+.section-enter-from-right .contacto-form-container {
+  animation: slideInFromRight 0.7s linear forwards;
+}
+
+/* Aplicar animación de entrada cuando scrolleas hacia arriba */
+.section-enter-from-left .hero-content,
+.section-enter-from-left .hero-title,
+.section-enter-from-left .hero-description,
+.section-enter-from-left .sobre-left,
+.section-enter-from-left .sobre-title,
+.section-enter-from-left .sobre-text,
+.section-enter-from-left .mision-left,
+.section-enter-from-left .vision-title,
+.section-enter-from-left .vision-text {
+  animation: slideInFromLeft 0.7s linear forwards;
+}
+
+.section-enter-from-left .sobre-right,
+.section-enter-from-left .sobre-image-container,
+.section-enter-from-left .sobre-image,
+.section-enter-from-left .mision-right,
+.section-enter-from-left .mision-title,
+.section-enter-from-left .mision-text,
+.section-enter-from-left .mision-center,
+.section-enter-from-left .mision-line,
+.section-enter-from-left .quienes-content,
+.section-enter-from-left .quienes-title,
+.section-enter-from-left .quienes-profiles,
+.section-enter-from-left .profile-card,
+.section-enter-from-left .ongs-content,
+.section-enter-from-left .ongs-title,
+.section-enter-from-left .ongs-text,
+.section-enter-from-left .ongs-subtitle,
+.section-enter-from-left .ongs-carousel,
+.section-enter-from-left .faq-content,
+.section-enter-from-left .faq-title,
+.section-enter-from-left .faq-questions,
+.section-enter-from-left .faq-item,
+.section-enter-from-left .contacto-content,
+.section-enter-from-left .contacto-promo,
+.section-enter-from-left .contacto-form-container {
+  animation: slideInFromRight 0.7s linear forwards;
 }
 
 /* La primera sección (hero) siempre está visible al inicio */
-.hero.section-visible {
+.hero.section-visible .hero-content {
   animation: none;
   transform: translateX(0);
   opacity: 1;

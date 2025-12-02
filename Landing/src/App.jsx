@@ -10,32 +10,44 @@ function App() {
 
   useEffect(() => {
     let lastScrollY = window.scrollY
+    let ticking = false
 
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      scrollDirection.current = currentScrollY > lastScrollY ? 'down' : 'up'
-      lastScrollY = currentScrollY
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY
+          scrollDirection.current = currentScrollY > lastScrollY ? 'down' : 'up'
+          lastScrollY = currentScrollY
 
-      const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
-      
-      // Encontrar la sección actual basada en la posición del scroll
-      let currentSection = 'hero'
-      const viewportCenter = window.innerHeight * 0.4
-      
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i])
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
-            currentSection = sections[i]
-            break
+          const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
+          
+          // Encontrar la sección actual basada en la posición del scroll
+          let currentSection = 'hero'
+          const viewportHeight = window.innerHeight
+          const scrollPosition = window.scrollY + viewportHeight * 0.5
+          
+          for (let i = 0; i < sections.length; i++) {
+            const element = document.getElementById(sections[i])
+            if (element) {
+              const rect = element.getBoundingClientRect()
+              const elementTop = window.scrollY + rect.top
+              const elementBottom = elementTop + rect.height
+              
+              if (scrollPosition >= elementTop && scrollPosition <= elementBottom) {
+                currentSection = sections[i]
+                break
+              }
+            }
           }
-        }
-      }
 
-      if (currentSection !== visibleSection) {
-        setPreviousSection(visibleSection)
-        setVisibleSection(currentSection)
+          if (currentSection !== visibleSection) {
+            setPreviousSection(visibleSection)
+            setVisibleSection(currentSection)
+          }
+          
+          ticking = false
+        })
+        ticking = true
       }
     }
 
@@ -46,6 +58,34 @@ function App() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [visibleSection])
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
+      const currentIndex = sections.indexOf(visibleSection)
+      const targetIndex = sections.indexOf(sectionId)
+      
+      // Actualizar el estado antes de hacer scroll para activar las animaciones
+      if (targetIndex !== currentIndex) {
+        setPreviousSection(visibleSection)
+        setVisibleSection(sectionId)
+      }
+      
+      // Pequeño delay para que las animaciones se activen
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 50)
+    }
+  }
+
+  const scrollToNext = () => {
+    const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
+    const currentIndex = sections.indexOf(visibleSection)
+    if (currentIndex < sections.length - 1) {
+      scrollToSection(sections[currentIndex + 1])
+    }
+  }
 
   const getSectionClass = (sectionId) => {
     const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
@@ -106,7 +146,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="sobre-chevron">▼</div>
+          <div className="sobre-chevron" onClick={scrollToNext} style={{ cursor: 'pointer' }}>▼</div>
         </section>
         <section id="quienes-somos" className={`quienes-somos ${getSectionClass('quienes-somos')}`} aria-label="Quienes somos">
           <div className="quienes-content">
@@ -144,7 +184,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="quienes-chevron">▼</div>
+          <div className="quienes-chevron" onClick={scrollToNext} style={{ cursor: 'pointer' }}>▼</div>
         </section>
         <section id="mision" className={`mision ${getSectionClass('mision')}`} aria-label="Misión">
           <div className="mision-content">
@@ -164,7 +204,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="mision-chevron">▼</div>
+          <div className="mision-chevron" onClick={scrollToNext} style={{ cursor: 'pointer' }}>▼</div>
         </section>
         <section id="ongs" className={`ongs ${getSectionClass('ongs')}`} aria-label="ONGs">
           <div className="ongs-content">
@@ -193,7 +233,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="ongs-chevron">▼</div>
+          <div className="ongs-chevron" onClick={scrollToNext} style={{ cursor: 'pointer' }}>▼</div>
         </section>
         <section id="faq" className={`faq ${getSectionClass('faq')}`} aria-label="Preguntas frecuentes">
           <div className="faq-content">
@@ -224,7 +264,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="faq-chevron">▼</div>
+          <div className="faq-chevron" onClick={scrollToNext} style={{ cursor: 'pointer' }}>▼</div>
         </section>
         <section id="contacto" className={`contacto ${getSectionClass('contacto')}`} aria-label="Contacto">
           <div className="contacto-content">
