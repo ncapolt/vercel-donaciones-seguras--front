@@ -1,7 +1,74 @@
 import './App.css'
 import NavBar from './Components/NavBar.jsx'
+import { useEffect, useRef, useState } from 'react'
 
 function App() {
+  const [visibleSection, setVisibleSection] = useState('hero')
+  const [previousSection, setPreviousSection] = useState('hero')
+  const sectionsRef = useRef({})
+  const scrollDirection = useRef('down')
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      scrollDirection.current = currentScrollY > lastScrollY ? 'down' : 'up'
+      lastScrollY = currentScrollY
+
+      const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
+      
+      // Encontrar la sección actual basada en la posición del scroll
+      let currentSection = 'hero'
+      const viewportCenter = window.innerHeight * 0.4
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i])
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+            currentSection = sections[i]
+            break
+          }
+        }
+      }
+
+      if (currentSection !== visibleSection) {
+        setPreviousSection(visibleSection)
+        setVisibleSection(currentSection)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Llamar una vez al inicio
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [visibleSection])
+
+  const getSectionClass = (sectionId) => {
+    const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
+    const currentIndex = sections.indexOf(visibleSection)
+    const sectionIndex = sections.indexOf(sectionId)
+    const previousIndex = sections.indexOf(previousSection)
+
+    if (sectionIndex === currentIndex) {
+      // Determinar desde qué lado debe entrar basado en la dirección del scroll
+      if (currentIndex > previousIndex || (currentIndex === 0 && previousIndex === 0)) {
+        return 'section-visible section-enter-from-right'
+      } else if (currentIndex < previousIndex) {
+        return 'section-visible section-enter-from-left'
+      } else {
+        return 'section-visible'
+      }
+    } else if (sectionIndex < currentIndex) {
+      return 'section-exit-left'
+    } else {
+      return 'section-exit-right'
+    }
+  }
+
   return (
     <>
       <header className="site-header" aria-label="Barra superior">
@@ -9,7 +76,7 @@ function App() {
       </header>
 
       <main>
-        <section id="hero" className="hero" aria-label="Hero">
+        <section id="hero" className={`hero ${getSectionClass('hero')}`} aria-label="Hero">
           <div className="hero-content">
             <h1 className="hero-title">
               <span className="hero-title-line1">TUS DONACIONES</span>
@@ -21,7 +88,7 @@ function App() {
           </div>
         </section>
 
-        <section id="sobre-nosotros" className="sobre-nosotros" aria-label="Sobre nosotros">
+        <section id="sobre-nosotros" className={`sobre-nosotros ${getSectionClass('sobre-nosotros')}`} aria-label="Sobre nosotros">
           <div className="sobre-content">
             <div className="sobre-left">
               <h2 className="sobre-title">
@@ -41,7 +108,7 @@ function App() {
           </div>
           <div className="sobre-chevron">▼</div>
         </section>
-        <section id="quienes-somos" className="quienes-somos" aria-label="Quienes somos">
+        <section id="quienes-somos" className={`quienes-somos ${getSectionClass('quienes-somos')}`} aria-label="Quienes somos">
           <div className="quienes-content">
             <h2 className="quienes-title">
               <span className="quienes-title-line1">Quienes</span>
@@ -79,7 +146,7 @@ function App() {
           </div>
           <div className="quienes-chevron">▼</div>
         </section>
-        <section id="mision" className="mision" aria-label="Misión">
+        <section id="mision" className={`mision ${getSectionClass('mision')}`} aria-label="Misión">
           <div className="mision-content">
             <div className="mision-left">
               <h2 className="vision-title">VISIÓN</h2>
@@ -99,7 +166,7 @@ function App() {
           </div>
           <div className="mision-chevron">▼</div>
         </section>
-        <section id="ongs" className="ongs" aria-label="ONGs">
+        <section id="ongs" className={`ongs ${getSectionClass('ongs')}`} aria-label="ONGs">
           <div className="ongs-content">
             <h2 className="ongs-title">
               <span className="ongs-title-line1">Apostamos a la</span>
@@ -128,7 +195,7 @@ function App() {
           </div>
           <div className="ongs-chevron">▼</div>
         </section>
-        <section id="faq" className="faq" aria-label="Preguntas frecuentes">
+        <section id="faq" className={`faq ${getSectionClass('faq')}`} aria-label="Preguntas frecuentes">
           <div className="faq-content">
             <h2 className="faq-title">
               <span className="faq-title-line1">Preguntas</span>
@@ -159,7 +226,7 @@ function App() {
           </div>
           <div className="faq-chevron">▼</div>
         </section>
-        <section id="contacto" className="contacto" aria-label="Contacto">
+        <section id="contacto" className={`contacto ${getSectionClass('contacto')}`} aria-label="Contacto">
           <div className="contacto-content">
             <div className="contacto-promo">
               <h2 className="contacto-promo-text">

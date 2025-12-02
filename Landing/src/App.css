@@ -909,3 +909,89 @@ main {
   min-height: 40vh;
   padding: 40px 16px;
 }
+
+/* Animaciones de scroll lateral */
+.hero,
+.sobre-nosotros,
+.quienes-somos,
+.mision,
+.ongs,
+.faq,
+.contacto {
+  position: relative;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  will-change: transform, opacity;
+  overflow-x: hidden;
+}
+
+/* Estado inicial: las secciones que no son la primera empiezan fuera de la pantalla */
+.sobre-nosotros:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
+.quienes-somos:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
+.mision:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
+.ongs:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
+.faq:not(.section-visible):not(.section-exit-left):not(.section-exit-right),
+.contacto:not(.section-visible):not(.section-exit-left):not(.section-exit-right) {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+/* Sección visible: en su posición normal */
+.section-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Sección saliendo hacia la izquierda (cuando scrolleas hacia abajo) */
+.section-exit-left {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+/* Sección saliendo hacia la derecha (cuando scrolleas hacia arriba) */
+.section-exit-right {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+/* Animación de entrada desde la izquierda */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animación de entrada desde la derecha */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Aplicar animación de entrada desde la derecha cuando scrolleas hacia abajo */
+.section-enter-from-right {
+  animation: slideInFromRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Aplicar animación de entrada desde la izquierda cuando scrolleas hacia arriba */
+.section-enter-from-left {
+  animation: slideInFromLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* La primera sección (hero) siempre está visible al inicio */
+.hero.section-visible {
+  animation: none;
+  transform: translateX(0);
+  opacity: 1;
+}
