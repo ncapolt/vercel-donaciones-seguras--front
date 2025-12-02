@@ -1,61 +1,66 @@
 import './App.css'
 import NavBar from './Components/NavBar.jsx'
-import { useEffect, useRef, useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function App() {
+  const [openFaq, setOpenFaq] = useState(null)
   const [visibleSection, setVisibleSection] = useState('hero')
-  const [previousSection, setPreviousSection] = useState('hero')
-  const sectionsRef = useRef({})
-  const scrollDirection = useRef('down')
+  const [previousSection, setPreviousSection] = useState('')
+  const scrollTimeoutRef = useRef(null)
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index)
+  }
 
   useEffect(() => {
-    let lastScrollY = window.scrollY
-    let ticking = false
-
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY
-          scrollDirection.current = currentScrollY > lastScrollY ? 'down' : 'up'
-          lastScrollY = currentScrollY
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
 
-          const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
-          
-          // Encontrar la sección actual basada en la posición del scroll
-          let currentSection = 'hero'
-          const viewportHeight = window.innerHeight
-          const scrollPosition = window.scrollY + viewportHeight * 0.5
-          
-          for (let i = 0; i < sections.length; i++) {
-            const element = document.getElementById(sections[i])
-            if (element) {
-              const rect = element.getBoundingClientRect()
-              const elementTop = window.scrollY + rect.top
-              const elementBottom = elementTop + rect.height
-              
-              if (scrollPosition >= elementTop && scrollPosition <= elementBottom) {
-                currentSection = sections[i]
-                break
+      scrollTimeoutRef.current = setTimeout(() => {
+        const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
+        const viewportHeight = window.innerHeight
+        const scrollPosition = window.scrollY + viewportHeight * 0.4
+
+        let currentSection = 'hero'
+        let maxVisibility = 0
+
+        sections.forEach(sectionId => {
+          const element = document.getElementById(sectionId)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            const elementTop = window.scrollY + rect.top
+            const elementBottom = elementTop + rect.height
+
+            if (scrollPosition >= elementTop && scrollPosition <= elementBottom) {
+              const visibility = Math.min(
+                (elementBottom - scrollPosition) / viewportHeight,
+                (scrollPosition - elementTop) / viewportHeight
+              )
+              if (visibility > maxVisibility) {
+                maxVisibility = visibility
+                currentSection = sectionId
               }
             }
           }
-
-          if (currentSection !== visibleSection) {
-            setPreviousSection(visibleSection)
-            setVisibleSection(currentSection)
-          }
-          
-          ticking = false
         })
-        ticking = true
-      }
+
+        if (currentSection !== visibleSection) {
+          setPreviousSection(visibleSection)
+          setVisibleSection(currentSection)
+        }
+      }, 100)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Llamar una vez al inicio
+    handleScroll()
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
     }
   }, [visibleSection])
 
@@ -65,17 +70,13 @@ function App() {
       const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
       const currentIndex = sections.indexOf(visibleSection)
       const targetIndex = sections.indexOf(sectionId)
-      
-      // Actualizar el estado antes de hacer scroll para activar las animaciones
+
       if (targetIndex !== currentIndex) {
         setPreviousSection(visibleSection)
         setVisibleSection(sectionId)
       }
-      
-      // Pequeño delay para que las animaciones se activen
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 50)
+
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
 
@@ -91,17 +92,15 @@ function App() {
     const sections = ['hero', 'sobre-nosotros', 'quienes-somos', 'mision', 'ongs', 'faq', 'contacto']
     const currentIndex = sections.indexOf(visibleSection)
     const sectionIndex = sections.indexOf(sectionId)
-    const previousIndex = sections.indexOf(previousSection)
+    const previousIndex = previousSection ? sections.indexOf(previousSection) : -1
 
     if (sectionIndex === currentIndex) {
-      // Determinar desde qué lado debe entrar basado en la dirección del scroll
-      if (currentIndex > previousIndex || (currentIndex === 0 && previousIndex === 0)) {
-        return 'section-visible section-enter-from-right'
+      if (currentIndex > previousIndex || previousIndex === -1) {
+        return 'section-visible section-enter-from-bottom'
       } else if (currentIndex < previousIndex) {
-        return 'section-visible section-enter-from-left'
-      } else {
-        return 'section-visible'
+        return 'section-visible section-enter-from-top'
       }
+      return 'section-visible'
     } else if (sectionIndex < currentIndex) {
       return 'section-exit-left'
     } else {
@@ -243,22 +242,38 @@ function App() {
             </h2>
             <div className="faq-questions">
               <div className="faq-item">
-                <div className="faq-question-container">
-                  <div className="faq-icon">?</div>
+                <div 
+                  className={`faq-question-container ${openFaq === 0 ? 'faq-open' : ''}`}
+                  onClick={() => toggleFaq(0)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div className="faq-icon">
+                    {openFaq === 0 ? '✓' : '>'}
+                  </div>
                   <div className="faq-question-text">
                     <h3 className="faq-question">Cómo funciona la auditoría de donaciones?</h3>
                     <div className="faq-underline"></div>
-                    <p className="faq-answer">Nuestra plataforma verifica y organiza cada campaña, asegurando que las donaciones se registren correctamente y lleguen de forma transparente a su destino.</p>
+                    <div className={`faq-answer-container ${openFaq === 0 ? 'faq-answer-open' : ''}`}>
+                      <p className="faq-answer">Nuestra plataforma verifica y organiza cada campaña, asegurando que las donaciones se registren correctamente y lleguen de forma transparente a su destino.</p>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="faq-item">
-                <div className="faq-question-container">
-                  <div className="faq-icon">?</div>
+                <div 
+                  className={`faq-question-container ${openFaq === 1 ? 'faq-open' : ''}`}
+                  onClick={() => toggleFaq(1)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div className="faq-icon">
+                    {openFaq === 1 ? '✓' : '>'}
+                  </div>
                   <div className="faq-question-text">
                     <h3 className="faq-question">Puedo elegir los productos que necesito?</h3>
                     <div className="faq-underline"></div>
-                    <p className="faq-answer">Sí. Las personas que requieran ayuda pueden reservar los productos disponibles, lo que garantiza que recibirán exactamente lo que necesitan.</p>
+                    <div className={`faq-answer-container ${openFaq === 1 ? 'faq-answer-open' : ''}`}>
+                      <p className="faq-answer">Sí. Las personas que requieran ayuda pueden reservar los productos disponibles, lo que garantiza que recibirán exactamente lo que necesitan.</p>
+                    </div>
                   </div>
                 </div>
               </div>
